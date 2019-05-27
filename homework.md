@@ -195,7 +195,9 @@ id |                title                | year | show_time
 ```
 9.  The cinema would also like to make the Guardians movies a back to back feature. Find out the show time of "Guardians of the Galaxy" and set the show time of "Guardians of the Galaxy 2" to start two hours later.
 ```
-UPDATE movies SET show_time = TO_CHAR(TO_TIMESTAMP((SELECT show_time FROM movies WHERE title = 'Guardians of the Galaxy')::TEXT, 'HH24:MI') + INTERVAL '2 hours', 'HH24:MI') WHERE title = 'Guardians of the Galaxy 2';
+UPDATE movies SET show_time = TO_CHAR(TO_TIMESTAMP(
+  (SELECT show_time FROM movies WHERE title = 'Guardians of the Galaxy')::TEXT, 'HH24:MI')
+   + INTERVAL '2 hours', 'HH24:MI') WHERE title = 'Guardians of the Galaxy 2';
 SELECT * FROM movies;
 id |                title                | year | show_time
 ----+-------------------------------------+------+-----------
